@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotes</title>
+    <meta charset="UTF-8">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        #quotes, h2{
+            display: inline-block;
+            vertical-align: top;
+        }
+        .quote{
+            padding: 5px;
+            margin: 0 auto;
+        }
+        </style>
+    <a href="logout">Logout</a>
+</head>
+</body>
+    <h1>Welcome, {{user.name}}</h1>
+
+    <h2>Quotable Quotes</h2>
+    <div id="quotes" style="height:500px;width:250px;border:3px solid black;overflow:auto;">
+        {% for quote in quotes %}
+            <div class ="quote" style="border: 2px black solid; width: 200px">
+                <p>{{quote.quotedby}}:{{quote.quote}}</p>
+                <p>Posted by: <a href="/users/{{quote.user.id}}">{{quote.user.name}}</a></p>
+                <a href="/addfav/{{quote.id}}">Add to My List</a>
+            </div>
+        {% endfor %}
+    </div>
+      
+    <h2>Your Favs</h2>
+    <div id="quotes" style="height:400px;width:250px;border:3px solid black;overflow:auto;">
+            {% for fav in favorite %}
+                <div class ="quote" style="border: 2px black solid; width: 200px">
+                    <p>{{fav.quotedby}}:{{fav.quote}}</p>
+                    <p>Posted by: <a href="/users/{{fav.user.id}}">{{fav.user.name}}</a></p>
+                    <a href="/removefav/{{fav.id}}">Remove from My List</a>
+                </div>
+            {% endfor %}
+        </div>
+
+
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="create" method="POST" style="height:150px;width:250px;border:3px solid black;margin-left:540px;padding:2px ">
+    <h3>Contribute a Quote</h3>
+    {% csrf_token %}
+    Quoted by: <input type="text" name="quotedby">
+    <br><br>
+    Message: <input type="text" name="quote">
+    <input type ="submit">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login/Reg</title>
+    <meta charset="UTF-8">
+</head>
+</body>
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    
+    <h1>Register</h1>
+    <form action ="register" method="POST">
+        {% csrf_token %}
+        Name: <input type="text" name="name">
+        Alias:<input type="text" name="alias">
+        Email:<input type="text" name="email">
+        Password:<input type="text" name="password">
+        <p>*Password should be at least 6 characters</p>
+        Confirm Password:<input type="text" name="confirmpassword">
+        Birthday:<input type="date" name="birthday">
+        <input type="submit">
+    </form>
+
+    <h1>Login</h1>
+    <form action ="login" method="POST">
+        {% csrf_token %}
+        Email:<input type="text" name="email">
+        Password:<input type="text" name="password">
+        <input type="submit">
+    </form>
+
+
+
+
+</body>
+</html>

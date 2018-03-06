@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UserPage</title>
+    <meta charset="UTF-8">
+    <a href="main">Logout</a> | <a href="quotes">Dashboard</a>
+   
+</head>
+</body>
+    <h2>Posts by {{user.name}}</h2>
+    <h2>Count: {{quote.count}}</h2>
+
+    {% for q in quote %}
+        <p><span style="color:red">{{q.quotedby}}</span>: {{q.quote}}</p>
+    {% endfor %}
+</body>
+</html>
